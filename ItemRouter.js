@@ -1,64 +1,74 @@
 const express = require('express');
 const app = express();
+const io = require('./IO.js');
+const business = require ('./Business.js');
 
-const itemContainer = [];
 const itemRouter = express.Router();
-let index = 0;
-
-function incrementIndex() {
-    return index++;
-}
 
 class Item {
-    constructor(name, amount) {
-        this.id = incrementIndex();
-        this.modifydate = 2021;
+    constructor(name, amount, id = null) {
+        this.id = id ?? business.IncrementIndex();
+        this.modifydate = new Date();
         this.name = name;
         this.amount = amount;
     }
 }
 
+// ----------------------------------------------------------------
+
 itemRouter.get('/get/:id', (req, res) => {
-    console.log('get id');
     const id = req.params.id;
-    const foundItem = itemContainer.find (
+    const foundItem = io.itemContainer.find (
         element => element.id == id
     );
-    res.json(foundItem);
+    if(!foundItem)
+        res.status(404).json('id not found');
+    else {
+        io.WriteToFile();                       // Debug.
+        res.status(200).json(foundItem);
+    }
 });
 
 itemRouter.get('/get', (req, res) => {
-    res.status(200).json(itemContainer);
+    io.ReadFromFile();                          // Debug.
+    res.status(200).json(io.itemContainer);
 });
 
 itemRouter.post('/post', (req, res) => {
     const recieved = req.body;
     const object = new Item(recieved.name, recieved.amount);
-    console.log(object.id, object.modifydate, object.name, object.amount);
-    itemContainer.push(object);
+    console.log('post object: ', object.id, object.modifydate, object.name, object.amount);         // Debug.
+    io.itemContainer.push(object);
     res.status(201).json(object);
 });
 
 itemRouter.put('/put', (req, res) => {
-    console.log('put');
+    const recieved = req.body;
+    const indexFound = io.itemContainer.findIndex((element) => element.id == recieved.id);
+    if (indexFound >= 0) {
+        const object = new Item(recieved.name, recieved.amount, recieved.id);
+        io.itemContainer.splice(indexFound, 1, object);
+        res.status(200).json(object);
+    }
+    else
+        res.status(404).json('id not found');
 });
 
 itemRouter.delete('/delete/:id', (req, res) => {
     const id = req.params.id;
-    const index = itemContainer.findIndex((element) => element.id == id);
-    if (index >= 0) {
-        itemContainer.splice(index, 1);
-        res.json('id removed');
+    const indexFound = io.itemContainer.findIndex((element) => element.id == id);
+    if (indexFound >= 0) {
+        io.itemContainer.splice(indexFound, 1);
+        res.status(200).json('item removed');
     }
     else {
-        res.json('id doesnt exist');
+        res.status(404).json('id not found');
     }
-        
 });
 
 itemRouter.delete('/delete', (req, res) => {
-    // itemContainer = [];
-    console.log('delete');
+    io.itemContainer = [];
+    res.status(200).json('deleted everything');
 });
 
 module.exports = itemRouter;

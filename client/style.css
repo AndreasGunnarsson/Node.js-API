@@ -1,0 +1,12 @@
+#jslistParent {
+    background-color : lightgreen;
+    display : flex;
+    flex-direction : column;
+}
+
+.child {
+    background-color : lightblue;
+    display : flex;
+    flex-direction : row;
+    justify-content : center;
+}

@@ -45,6 +45,7 @@ itemRouter.post('/post',
     body('name').notEmpty(),
     body('amount').isInt({min: 0, max: 100}),
     (req, res) => {
+        console.log('req: ', req);
         const errors = validationResult(req);
         if (!errors.isEmpty())
             return res.status(400).json({ errors: errors.array() });

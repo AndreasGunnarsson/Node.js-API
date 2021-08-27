@@ -6,18 +6,29 @@
         <link rel="stylesheet" href="./style.css">
     </head>
     <body>
+        <form id="createForm" method="post">
+            <label>Name:
+                <input type="text" required id="inputNameCreate">
+            </label>
+            <label>Amount:
+                <input type="number" required min="0" max="100" id="inputAmountCreate">
+            </label>
+            <button type="submit">Submit</button>
+        </form>
+        <form id="editForm" method="put">
+            ID
+            <label>Name:
+                <input type="text" required id="inputNameEdit">
+            </label>
+            <label>Amount:
+                <input type="number" required min="0" max="100" id="inputAmountEdit">
+            </label>
+            LASTEDITDATE
+            <button type="submit">Update</button>
+        </form>
         <div id="parentContainer"></div>
         <div id="lowerButton">
             <button id="deleteAllButton">Delete all</button>
         </div>
-        <form id="createForm" method="post">
-            <label>Name:
-                <input type="text" required id="inputName">
-            </label>
-            <label>Amount:
-                <input type="number" required min="0" max="100" id="inputAmount">
-            </label>
-            <button type="submit">Submit</button>
-        </form>
     </body>
 </html>

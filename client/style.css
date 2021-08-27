@@ -25,3 +25,12 @@
     flex-direction : row;
     justify-content : space-evenly;
 }
+
+#createForm {
+    background-color: brown;
+}
+
+#editForm {
+    display: none;
+    background-color: gold;
+}

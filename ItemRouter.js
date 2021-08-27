@@ -17,12 +17,16 @@ class Item {
 
 // ----------------------------------------------------------------
 
+// itemRouter.get('/get/:id',
 itemRouter.get('/get/:id',
-    body('id').isInt({min: 0}),
+    // body('id').isInt({min: 0}),
     (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty())
-            return res.status(400).json({ errors: errors.array() });
+        // console.log('parameters: ', req.params.id);
+        // const errors = validationResult(req);
+        // if (!errors.isEmpty())
+        // if (req.params.id == 10)
+        //     return res.status(400);
+            // return res.status(400).json({ errors: errors.array() });
         const id = req.params.id;
         const foundItem = io.itemContainer.find (
             element => element.id == id
@@ -78,11 +82,11 @@ itemRouter.put('/put',
 );
 
 itemRouter.delete('/delete/:id',
-    body('id').isInt({min: 0}),
+    // body('id').isInt({min: 0}),
     (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty())
-            return res.status(400).json({ errors: errors.array() });
+        // const errors = validationResult(req);
+        // if (!errors.isEmpty())
+        //     return res.status(400).json({ errors: errors.array() });
         const id = req.params.id;
         const indexFound = io.itemContainer.findIndex((element) => element.id == id);
         if (indexFound >= 0) {

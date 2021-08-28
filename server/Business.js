@@ -1,10 +1,13 @@
-let index = 0;
+const state = {
+    index: 0
+}
 
 function IncrementIndex() {
-    return index++;
+    console.log('index business: ', state.index);     // Debug.
+    return state.index++;
 }
 
 module.exports = {
-    index,
+    state,
     IncrementIndex
 }

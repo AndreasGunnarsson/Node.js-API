@@ -4,6 +4,7 @@ const app = express();
 const io = require('./IO.js');
 const business = require ('./Business.js');
 
+io.ReadFromFile();
 const itemRouter = express.Router();
 
 class Item {
@@ -17,16 +18,8 @@ class Item {
 
 // ----------------------------------------------------------------
 
-// itemRouter.get('/get/:id',
 itemRouter.get('/get/:id',
-    // body('id').isInt({min: 0}),
     (req, res) => {
-        // console.log('parameters: ', req.params.id);
-        // const errors = validationResult(req);
-        // if (!errors.isEmpty())
-        // if (req.params.id == 10)
-        //     return res.status(400);
-            // return res.status(400).json({ errors: errors.array() });
         const id = req.params.id;
         const foundItem = io.itemContainer.find (
             element => element.id == id
@@ -34,14 +27,12 @@ itemRouter.get('/get/:id',
         if(!foundItem)
             res.status(404).json('Id not found.');
         else {
-            io.WriteToFile();                       // Debug.
             res.status(200).json(foundItem);
         }
     }
 );
 
 itemRouter.get('/get', (req, res) => {
-    io.ReadFromFile();                          // Debug.
     res.status(200).json(io.itemContainer);
 });
 
@@ -49,15 +40,18 @@ itemRouter.post('/post',
     body('name').notEmpty(),
     body('amount').isInt({min: 0, max: 100}),
     (req, res) => {
-        console.log('req: ', req);
+        // console.log('req: ', req);              // Debug.
         const errors = validationResult(req);
         if (!errors.isEmpty())
             return res.status(400).json({ errors: errors.array() });
         const recieved = req.body;
         const object = new Item(recieved.name, recieved.amount);
+        console.log('index (post): ', business.state.index);          // Debug.
         console.log('Post object: ', object.id, object.modifydate, object.name, object.amount);         // Debug.
         io.itemContainer.push(object);
+        console.log('added to itemContainer (POST): ', io.itemContainer);       // Debug.
         res.status(201).json(object);
+        io.WriteToFile();
     }
 );
 
@@ -78,15 +72,12 @@ itemRouter.put('/put',
         }
         else
             res.status(404).json('Id not found.');
+        io.WriteToFile();
     }
 );
 
 itemRouter.delete('/delete/:id',
-    // body('id').isInt({min: 0}),
     (req, res) => {
-        // const errors = validationResult(req);
-        // if (!errors.isEmpty())
-        //     return res.status(400).json({ errors: errors.array() });
         const id = req.params.id;
         const indexFound = io.itemContainer.findIndex((element) => element.id == id);
         if (indexFound >= 0) {
@@ -96,12 +87,14 @@ itemRouter.delete('/delete/:id',
         else {
             res.status(404).json('Id not found.');
         }
+        io.WriteToFile();
     }
 );
 
 itemRouter.delete('/delete', (req, res) => {
     io.itemContainer = [];
     res.status(200).json('Deleted everything.');
+    io.WriteToFile();
 });
 
 module.exports = itemRouter;

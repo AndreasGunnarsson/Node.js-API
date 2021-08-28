@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -7,6 +8,7 @@
     </head>
     <body>
         <form id="createForm" method="post">
+            <p>Create new</p>
             <label>Name:
                 <input type="text" required id="inputNameCreate">
             </label>
@@ -16,18 +18,17 @@
             <button type="submit">Submit</button>
         </form>
         <form id="editForm" method="put">
-            ID
+            <p>Edit</p>
             <label>Name:
                 <input type="text" required id="inputNameEdit">
             </label>
             <label>Amount:
                 <input type="number" required min="0" max="100" id="inputAmountEdit">
             </label>
-            LASTEDITDATE
             <button type="submit">Update</button>
         </form>
         <div id="parentContainer"></div>
-        <div id="lowerButton">
+        <div id="lowerButtonContainer">
             <button id="deleteAllButton">Delete all</button>
         </div>
     </body>

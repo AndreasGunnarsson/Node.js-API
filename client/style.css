@@ -1,18 +1,17 @@
+* {
+    font-family: Sans-Serif;
+}
+
+body {
+    background-color: gray;
+    margin: 0;
+}
+
+div {
+    color: white;
+}
+
 #parentContainer {
-    background-color : lightgreen;
-    display : flex;
-    flex-direction : column;
-    width: 50%;
-    margin: auto;
-}
-
-#lowerButton {
-    width: 50%;
-    margin: auto;
-}
-
-.parentContainerSHARE {
-    background-color : lightgreen;
     display : flex;
     flex-direction : column;
     width: 50%;
@@ -20,17 +19,31 @@
 }
 
 .child {
-    background-color : lightblue;
-    display : flex;
-    flex-direction : row;
-    justify-content : space-evenly;
+    background-color: #765E67;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+label {
+    color: white;
+}
+
+p {
+    margin: 0;
+    color: white;
+}
+
+#lowerButtonContainer {
+    width: 50%;
+    margin: auto;
 }
 
 #createForm {
-    background-color: brown;
+    background-color: #425053;
 }
 
 #editForm {
     display: none;
-    background-color: gold;
+    background-color: #523161;
 }

@@ -1,9 +1,9 @@
 const state = {
-    index: 0
+    index: 0,
+    itemContainer: []
 }
 
 function IncrementIndex() {
-    console.log('index business: ', state.index);     // Debug.
     return state.index++;
 }
 

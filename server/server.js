@@ -4,6 +4,7 @@ const cors = require('cors');
 const itemrouter = require('./ItemRouter');
 
 app.use(cors());
+
 // For JSON requests in the body
 app.use(express.json());
 

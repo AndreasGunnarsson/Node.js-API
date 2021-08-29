@@ -1,6 +1,7 @@
 const business = require ('./Business.js');
 
 /**
+ * Function to create a model. 
  * @param {string} name
  * @param {number} amount
  * @param {number} id

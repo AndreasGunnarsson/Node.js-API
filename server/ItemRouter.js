@@ -5,8 +5,10 @@ const model = require('./ItemModel.js');
 const business = require ('./Business.js');
 const itemRouter = express.Router();
 
+// Reads from file when the program stars if there is any file available.
 io.ReadFromFile();
 
+// Endpoint for GET which responds with one object in the array itemContainer.
 itemRouter.get('/get/:id',
     (req, res) => {
         const id = req.params.id;
@@ -21,10 +23,12 @@ itemRouter.get('/get/:id',
     }
 );
 
+// Endpoint for GET that prints sends a response with all items in the array itemContainer.
 itemRouter.get('/get', (req, res) => {
     res.status(200).json(business.state.itemContainer);
 });
 
+// Endpoint for POST which creates an object based on what the user sends in the body of the request and saves it in the array itemContainer.
 itemRouter.post('/post',
     body('name').notEmpty(),
     body('amount').isInt({min: 0, max: 100}),
@@ -41,6 +45,7 @@ itemRouter.post('/post',
     }
 );
 
+// Endpoint for PUT to edit an item.
 itemRouter.put('/put',
     body('id').isInt({min: 0}),
     body('name').notEmpty(),
@@ -62,6 +67,7 @@ itemRouter.put('/put',
     }
 );
 
+// Endpoint for DELETE to remove an item with a specific id.
 itemRouter.delete('/delete/:id',
     (req, res) => {
         const id = req.params.id;
@@ -77,6 +83,7 @@ itemRouter.delete('/delete/:id',
     }
 );
 
+// Endpoint for DETELE that removes everything.
 itemRouter.delete('/delete', (req, res) => {
     business.state.itemContainer = [];
     res.status(200).json('Deleted everything.');

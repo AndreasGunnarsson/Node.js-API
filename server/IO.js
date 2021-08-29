@@ -3,6 +3,7 @@ const fs = require('fs');
 
 const saveFile = 'save.json';
 
+// Writes the array and the last index number used to a JSON file. 
 function WriteToFile() {
     const stringify = JSON.stringify(business.state.itemContainer);
     const indexstring = '"lastIndex":' + business.state.index;
@@ -13,6 +14,7 @@ function WriteToFile() {
     });
 }
 
+// Reads from the same JSON file that we previously saved to.
 function ReadFromFile() {
     fs.readFile(saveFile, (err, data) => {
         if (err) {

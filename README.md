@@ -1,11 +1,11 @@
-#Inlämning 3 - REST API
+# Inlämning 3 - REST API
 
-##Beskrivning
+## Beskrivning
 Projektet innehåller ett REST-API som använder sig av paketet [Express](https://expressjs.com) (ett ramverk för att bland annat bygga API:er) till [Node.js](https://nodejs.org) och en tillhörande klient som körs direkt i webbläsaren.\
 Använder JavaScript i för API-servern och HTML, CSS samt JavaScript för klienten.\
 API:et i sig hanterar "items". Ett item har ett id, ett namn, ett antal och ett datum då det senaste modifierades. Kan tänka sig att det är ett eller flera föremål av en viss typ (specifikt namn) på ett lager eller liknande.
 
-##Vilka krav som är uppfyllda
+## Vilka krav som är uppfyllda
 * Projektet innehåller minst 4 st. endpoints (GET, POST, PUT & DELETE för en resurs)
    * Se filen ItemRouter.js.
 * Samtliga endpoints skall kunna nås via en REST Client fil (.rest|.http)
@@ -29,11 +29,11 @@ API:et i sig hanterar "items". Ett item har ett id, ett namn, ett antal och ett 
 * Ytterligare en GET endpoint skall läggas till där det går att hämta ett specifikt objekt
    * Se endpointen "/get/:id" i filen ItemRouter.js.
 
-##Info om hur projektet byggs och körs
+## Info om hur projektet byggs och körs
 Kör "npm install".\
 Startas antingen via "npm run start" eller "node server.js".
 
-##Vad jag hade velat förbättra om tid fanns
+## Vad jag hade velat förbättra om tid fanns
 * Servern blev rörig med alla filer i en mapp; hade behövt separera mer.
 * Filen Business.js lever inte upp till namnet. Allmänt bara ha bättre kod-struktur med mer logisk separering.
 * De datum (framförallt klockslaget) som sparas stämmer inte med verkligheten; hade behövt se över tidzoner så hade det nog inte varit så avancerad fix.
